@@ -1,0 +1,21 @@
+{
+  "name": "lambda-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "serverless-start": "serverless offline",
+    "serverless-deploy": "serverless deploy",
+    "serverless-doctor": "serverless doctor"
+  },
+  "dependencies": {
+    "@codegenie/serverless-express": "^4.14.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "serverless": "^3.38.0",
+    "serverless-offline": "^13.3.4",
+    "source-map-support": "^0.5.21"
+  }
+}

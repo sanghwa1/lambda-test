@@ -1,0 +1,19 @@
+service: lambda-test-sanghwa
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs18.x
+  region: ap-northeast-2
+  profile: loomex-dev
+
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: ./lambda.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
