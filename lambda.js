@@ -12,7 +12,6 @@ function asyncTask () {
 
 async function setup (event, context) {
   const asyncValue = await asyncTask()
-  console.log(asyncValue)
   serverlessExpressInstance = serverlessExpress({ app })
   return serverlessExpressInstance(event, context)
 }

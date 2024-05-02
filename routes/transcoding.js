@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('index 2222')
+
+router.get('/:mediaCode', function(req, res, next) {
+  res.send('transcoding');
 });
 
 module.exports = router;
