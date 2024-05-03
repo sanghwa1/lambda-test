@@ -1,5 +1,13 @@
 service: lambda-test-sanghwa
 
+configValidationMode: error
+
+# layers:
+#   lambda-test-sanghwa-dev:
+#     path: layer
+#     compatibleRuntimes:
+#       - nodejs18.x
+
 provider:
   name: aws
   stage: dev
@@ -17,3 +25,11 @@ functions:
       - http:
           path: /{proxy+}
           method: any
+    layers:
+      - arn:aws:lambda:ap-northeast-2:972521143148:layer:ffmpeg:3
+    environment:
+      
+  
+package:
+  patterns:
+    - "!node_modules/**"
