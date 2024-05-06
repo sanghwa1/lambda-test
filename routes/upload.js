@@ -3,7 +3,7 @@ const router = express.Router()
 const moment = require('moment/moment');
 const crypto = require('crypto');
 const AWS = require("aws-sdk");
-const s3 = new AWS.S3({
+const S3 = new AWS.S3({
   signatureVersion: 'v4'
 });
 const STORAGE_BUCKET_NAME = `sanghwa-test`; 
@@ -18,11 +18,11 @@ router.post('/', async function(req, res, next) {
     const fileName = req.body.fileName;
     if(!key) {
       errorData.errorMessage = '인증에 실패하였습니다.';
-      res.status(401).json(errorData);
+      return res.status(401).json(errorData);
     };
     if(!fileName) {
       errorData.errorMessage = '유효하지 않은 파일명입니다.';
-      res.status(400).json(errorData);
+      return res.status(400).json(errorData);
     };
 
     const mediaCode = `M${moment().format('YYYYMMDDHHmmssSSS')}${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
@@ -35,9 +35,9 @@ router.post('/', async function(req, res, next) {
       Key: `${YYYYMMDD}/${mediaCode}/${fileName}`,
       Expires: 60 * 10, // 10분
     };
-    const signedUrl = await s3.getSignedUrlPromise("putObject", params)
+    const signedUrl = await S3.getSignedUrlPromise("putObject", params)
     
-    res.status(200).json({
+    return res.status(200).json({
       mediaCode,
       uploadURL: signedUrl
     });
@@ -45,7 +45,7 @@ router.post('/', async function(req, res, next) {
   } catch(err){
     console.log(`Post - upload-url - Err - ${JSON.stringify(err)}`);
     errorData.errorMessage = 'Server Error.';
-    res.status(500).json(errorData);
+    return res.status(500).json(errorData);
   }
 });
 

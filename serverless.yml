@@ -14,6 +14,8 @@ provider:
   runtime: nodejs18.x
   region: ap-northeast-2
   profile: loomex-dev
+  memorySize: 1024
+  timeout: 300
 
 plugins:
   - serverless-offline
