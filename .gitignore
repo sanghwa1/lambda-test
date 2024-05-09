@@ -38,6 +38,8 @@ lerna-debug.log*
 .env.*
 ecosystem*
 package-lock.json
+temp/*
 
 # aws
 /.serverless
+

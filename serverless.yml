@@ -1,6 +1,8 @@
-service: lambda-test-sanghwa
+service: ${env:AW_SERVICE}
 
 configValidationMode: error
+
+useDotenv: true
 
 # layers:
 #   lambda-test-sanghwa-dev:
@@ -8,17 +10,21 @@ configValidationMode: error
 #     compatibleRuntimes:
 #       - nodejs18.x
 
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+
 provider:
   name: aws
-  stage: dev
+  stage: '${opt:stage, "dev"}'
+  region: ${env:AW_REGION}
   runtime: nodejs18.x
-  region: ap-northeast-2
   profile: loomex-dev
   memorySize: 1024
   timeout: 300
-
-plugins:
-  - serverless-offline
+  s3:
+    bucketOne:
+      name: ${env:AW_BUCKET_NAME}
 
 functions:
   api:
@@ -29,8 +35,6 @@ functions:
           method: any
     layers:
       - arn:aws:lambda:ap-northeast-2:972521143148:layer:ffmpeg:3
-    environment:
-      
   
 package:
   patterns:

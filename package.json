@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "sls-start": "nodemon --watch routes/ --exec \"serverless offline\"",
-    "sls-deploy": "serverless deploy",
+    "sls-start:local": "nodemon --watch routes/ --exec \"serverless offline --stage local\"",
+    "sls-start:dev": "nodemon --watch routes/ --exec \"serverless offline --stage dev\"",
+    "sls-start:prod": "nodemon --watch routes/ --exec \"serverless offline --stage prod\"",
+    "sls-deploy:dev": "serverless deploy --stage dev",
+    "sls-deploy:prod": "serverless deploy --stage prod",
     "sls-doctor": "serverless doctor"
   },
   "dependencies": {
@@ -14,10 +17,13 @@
     "debug": "~2.6.9",
     "ejs": "^3.1.10",
     "express": "~4.16.1",
+    "mariadb": "^3.3.0",
     "moment": "^2.30.1",
     "morgan": "~1.9.1",
     "nodemon": "^3.1.0",
+    "sequelize": "^6.37.3",
     "serverless": "^3.38.0",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^13.3.4",
     "source-map-support": "^0.5.21"
   }
